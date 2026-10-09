@@ -1,0 +1,60 @@
+/* colors follow the Fry site's themes: darkly by default, cosmo when the system prefers light */
+:root {
+  --bg: #222;
+  --fg: #dee2e6;
+  --muted: #adb5bd;
+  --accent: #00bc8c;
+  --card-bg: #303030;
+  --border: #444;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fff;
+    --fg: #373a3c;
+    --muted: #6c757d;
+    --accent: #2780e3;
+    --card-bg: #f8f9fa;
+    --border: #dee2e6;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Lato, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+h1 { font-size: 2.25rem; margin: 0 0 0.5rem; }
+h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+h3 { font-size: 1.1rem; margin: 0 0 0.35rem; }
+
+.tagline { color: var(--muted); margin: 0 0 1rem; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+
+.card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  color: var(--fg);
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--accent); text-decoration: none; }
+.card h3 { color: var(--accent); }
+.card p { margin: 0; color: var(--muted); }
