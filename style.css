@@ -1,21 +1,23 @@
 /* colors follow the Fry site's themes: darkly by default, cosmo when the system prefers light */
 :root {
-  --bg: #222;
-  --fg: #dee2e6;
-  --muted: #adb5bd;
+  --bg: #1d1d1d;
+  --surface: #2a2a2a;
+  --fg: #e4e6e8;
+  --muted: #a3abb3;
   --accent: #00bc8c;
-  --card-bg: #303030;
-  --border: #444;
+  --accent-soft: rgba(0, 188, 140, 0.12);
+  --border: #3d3d3d;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: #fff;
-    --fg: #373a3c;
-    --muted: #6c757d;
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --fg: #2b2e31;
+    --muted: #61686f;
     --accent: #2780e3;
-    --card-bg: #f8f9fa;
-    --border: #dee2e6;
+    --accent-soft: rgba(39, 128, 227, 0.10);
+    --border: #dfe3e8;
   }
 }
 
@@ -26,35 +28,101 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: Lato, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.65;
 }
 
 main {
-  max-width: 44rem;
+  max-width: 46rem;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: 5rem 1rem 3rem;
 }
-
-h1 { font-size: 2.25rem; margin: 0 0 0.5rem; }
-h2 { font-size: 1.35rem; margin: 2.5rem 0 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
-h3 { font-size: 1.1rem; margin: 0 0 0.35rem; }
-
-.tagline { color: var(--muted); margin: 0 0 1rem; }
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+h1 { font-size: clamp(2.25rem, 6vw, 3rem); font-weight: 900; letter-spacing: -0.02em; margin: 0 0 0.75rem; line-height: 1.1; }
+h2 {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin: 3.5rem 0 1.25rem;
+}
+h3 { font-size: 1.1rem; margin: 0; line-height: 1.35; }
 
+.lede { font-size: 1.2rem; color: var(--muted); margin: 0 0 1.5rem; max-width: 40rem; }
+
+.links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--fg);
+  font-size: 0.95rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.pill svg { width: 1rem; height: 1rem; fill: currentColor; }
+.pill:hover { border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+
+/* experience and education entries */
+.entry { padding-left: 1.25rem; border-left: 2px solid var(--border); margin-bottom: 2.25rem; }
+.entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.org { margin: 0.1rem 0 0; color: var(--muted); }
+.when {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.entry ul { margin: 0.75rem 0 0; padding-left: 1.1rem; }
+.entry li { margin-bottom: 0.4rem; }
+.entry li::marker { color: var(--accent); }
+.note { margin: 0.75rem 0 0; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0; }
+.tags span {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 0.3rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* project cards */
 .card {
   display: block;
-  background: var(--card-bg);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
   color: var(--fg);
-  transition: border-color 0.15s;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.15s, transform 0.15s;
 }
-.card:hover { border-color: var(--accent); text-decoration: none; }
-.card h3 { color: var(--accent); }
-.card p { margin: 0; color: var(--muted); }
+a.card:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+.card img { display: block; width: 100%; height: auto; border-bottom: 1px solid var(--border); }
+.card-body { padding: 1.25rem 1.4rem 1.4rem; }
+.card-body p { margin: 0.6rem 0 0; color: var(--muted); }
+.card-body .tags { margin-top: 1rem; }
+a.card h3 { color: var(--accent); }
+.arrow { display: inline-block; transition: transform 0.15s; }
+a.card:hover .arrow { transform: translateX(3px); }
+
+.plain { list-style: none; padding: 0; margin: 0; }
+.plain li { padding: 0.65rem 0; border-bottom: 1px solid var(--border); }
+.plain li:last-child { border-bottom: none; }
+
+footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 34rem) {
+  main { padding-top: 3rem; }
+  .entry { padding-left: 0.9rem; }
+}
